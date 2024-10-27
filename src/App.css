@@ -1,38 +1,178 @@
-.App {
-  text-align: center;
-}
+.header {
+  padding: 10px;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .title {
+    text-align: center;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.addNameContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin: 20px 10px;
+
+  .nameLabel {
+    font-size: 20px;
+  }
+
+  .addName {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    margin-top: 2px;
+
+    .nameInput {
+      all: unset;
+      padding: 5px;
+      border: 1px solid brown;
+      border-radius: 4px;
+      height: max-content;
+      height: 30px;
+    }
+
+    .nameButton {
+      all: unset;
+      background-color: #698bff;
+      border-radius: 4px;
+      color: aliceblue;
+      cursor: pointer;
+      height: 34px;
+      padding: 5px 10px;
+      width: 50px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .nameButton:disabled {
+      background-color: #e5e5e5;
+      color: #a9a9a9 ;
+      cursor: not-allowed;
+    }
+  }
 }
 
-.App-link {
-  color: #61dafb;
+.selectedNamesContainer {
+  margin: 20px 10px;
+
+  .selectedNamesTitle {
+    font-size: 20px;
+  }
+
+  .selectedNamesGrid {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 20px 0;
+    flex-wrap: wrap;
+
+    .selectedNameBlock {
+      align-items: center;
+      background-color: aqua;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+      padding: 5px 10px;
+
+      .selectedNameValue {
+        font-weight: bold;
+      }
+
+      .selectedNameButton {
+        cursor: pointer;
+        margin-left: 5px;
+        width: 20px;
+      }
+    }
+  }
+
+  .selectedNamesClearAll {
+    all: unset;
+    background-color: #d97708;
+    border-radius: 4px;
+    color: #fcf3ea;
+    cursor: pointer;
+    font-weight: bold; 
+    font-size: 16px;
+    height: 34px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    text-align: center;
+    width: max-content;
+  }
+
+  .submitButton {
+    all: unset;
+    background-color: #698bff;
+    border-radius: 4px;
+    color: aliceblue;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    height: 34px;
+    padding: 5px 10px;
+    text-align: center;
+    width: max-content;
+  }
+  .submitButtonDisabled {
+    all: unset;
+    background-color: #e5e5e5;
+    border-radius: 4px;
+    color: #a9a9a9 ;
+    cursor: not-allowed;
+    font-size: 16px;
+    font-weight: bold;
+    height: 34px;
+    padding: 5px 10px;
+    text-align: center;
+    width: max-content;
+  }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.matchesContainer {
+  margin: 20px 10px;
+
+  .matchesTitle{
+    font-size: 20px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .matchBlock {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px 0;
+
+    .matchName {
+      background-color: aquamarine;
+      border-radius: 4px;
+      padding: 5px 10px;
+    }
+
+    .matchIcon{
+      width: 50px;
+      height: 20px;
+    }
   }
+
+  .matchesClearAllButton {
+    all: unset;
+    background-color: #d97708;
+    border-radius: 4px;
+    color: #fcf3ea;
+    cursor: pointer;
+    font-weight: bold; 
+    font-size: 16px;
+    height: 34px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    text-align: center;
+    width: max-content;
+  }
+}
+
+.error {
+  color: #d4351f;
+  font-weight: bold;
 }
