@@ -87,7 +87,7 @@ function App() {
         <div className="addNameContainer">
           {/* add name */}
           <label className="nameLabel" htmlFor="name">
-            Enter Name:
+            Enter Name to Add:
           </label>
           <div className="addName">
             <input
@@ -128,15 +128,14 @@ function App() {
                 );
               })}
             </div>
-            <div>
+            <div className="selectedNamesSubmission">
               <button
                 className="selectedNamesClearAll"
                 onClick={() => setNamesArray([])}
               >
                 Clear All
               </button>
-            </div>
-            <button
+              <button
               className={
                 namesArray.length < 3 ? "submitButtonDisabled" : "submitButton"
               }
@@ -144,6 +143,7 @@ function App() {
             >
               Submit
             </button>
+            </div>
             {errors?.count && <div className="error">{errors.count}</div>}
           </div>
         )}
