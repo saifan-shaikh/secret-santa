@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { errValues } from "./components/constants";
 import closeIcon from "../src/components/images/close-round-icon.svg";
-import arrowRight from "../src/components/images/arrow-right.svg";
+import Results from "./components/results";
 import "./App.css";
 
 function App() {
   // state declarations
   const [namesArray, setNamesArray] = useState([]);
   const [inputName, setInputName] = useState("");
+  const [currentState, setCurrentState] =useState('home')
   const [resultMatches, setResultMatches] = useState([]);
   const [errors, setErrors] = useState({
     name: "",
@@ -49,31 +50,37 @@ function App() {
     setNamesArray(tmpArr);
   };
 
-  const generateShuffledArray = (arr) => {
-    for (let i = arr.length - 1; i > 0; i--) {
-      const tmp = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[tmp]] = [arr[tmp], arr[i]];
+  const handleNamesSubmit = () => {
+    let givers = [...namesArray]
+    let receivers = [...namesArray]
+    let res = [];
+    let assignments = {};
+    for (let i=0 ; i<givers.length; i++) {
+      let availableReceivers = receivers.filter(receiver => receiver !== givers[i]);
+      if (availableReceivers.length === 0) {
+        // Swap the last two assignments
+        let temp = assignments[givers[i - 1]];
+        assignments[givers[i - 1]] = givers[i];
+        assignments[givers[i]] = temp;
+      } else {
+        let randomIndex = Math.floor(Math.random() * availableReceivers.length);
+        let selectedReceiver = availableReceivers[randomIndex];
+        assignments[givers[i]] = selectedReceiver;
+        receivers = receivers.filter(receiver => receiver !== selectedReceiver);
+      }
     }
-    return arr;
+    for(let i=0; i< namesArray.length; i++) {
+      res.push({ name: namesArray[i], match: assignments[namesArray[i]] });
+    }
+    setResultMatches(res);
+    setCurrentState('result');
   };
 
-  const handleNamesSubmit = () => {
-    if (namesArray.length < 3) {
-      setErrors((prev) => ({ ...prev, count: errValues.count }));
-    } else {
-      const res = [];
-      const shuffledArr = generateShuffledArray([...namesArray]);
-      for (let i = 0; i < namesArray.length; i++) {
-        if (namesArray[i] === shuffledArr[i]) {
-          const tmp = shuffledArr[i];
-          shuffledArr[i] = shuffledArr[(i + 1) % namesArray.length];
-          shuffledArr[(i + 1) % namesArray.length] = tmp;
-        }
-        res.push({ name: namesArray[i], match: shuffledArr[i] });
-      }
-      setResultMatches(res);
-    }
-  };
+  const handleClearAll = () => {
+    // handleNamesSubmit();
+    setResultMatches([]);
+    setCurrentState("home");
+  }
 
   // return statement
   return (
@@ -84,7 +91,9 @@ function App() {
       </header>
       {/* body */}
       <div className="body">
-        <div className="addNameContainer">
+        {currentState === 'home' && (
+          <div>
+            <div className="addNameContainer">
           {/* add name */}
           <label className="nameLabel" htmlFor="name">
             Enter Name to Add:
@@ -136,43 +145,27 @@ function App() {
                 Clear All
               </button>
               <button
-              className={
-                namesArray.length < 3 ? "submitButtonDisabled" : "submitButton"
-              }
-              onClick={() => handleNamesSubmit()}
-            >
-              Submit
-            </button>
+                className={
+                  namesArray.length < 3
+                    ? "submitButtonDisabled"
+                    : "submitButton"
+                }
+                onClick={() => handleNamesSubmit()}
+              >
+                Submit
+              </button>
             </div>
             {errors?.count && <div className="error">{errors.count}</div>}
           </div>
         )}
-        {/* show matches */}
-        {resultMatches.length > 0 && (
-          <div className="matchesContainer">
-            <div className="matchesTitle">Secret Santa Matches:</div>
-            {resultMatches.map((val) => {
-              return (
-                <div className="matchBlock" key={val.name}>
-                  <div className="matchName">{val.name}</div>
-                  <img
-                    className="matchIcon"
-                    src={arrowRight}
-                    alt="arrow-right-match"
-                  />
-                  <div className="matchName">{val.match}</div>
-                </div>
-              );
-            })}
-            <div>
-              <button
-                className="matchesClearAllButton"
-                onClick={() => setResultMatches([])}
-              >
-                Clear All Matches
-              </button>
-            </div>
           </div>
+        )}
+        {/* show matches */}
+        {currentState === 'result' && resultMatches.length > 0 && (
+          <Results 
+            handleClearAll= {handleClearAll}
+            resultMatches = {resultMatches}
+          />
         )}
       </div>
     </div>

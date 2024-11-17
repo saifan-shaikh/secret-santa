@@ -33,7 +33,7 @@
 
     .nameButton {
       all: unset;
-      background-color: #4B92FB;
+      background-color: #4b92fb;
       border-radius: 4px;
       color: aliceblue;
       cursor: pointer;
@@ -45,7 +45,7 @@
     }
     .nameButton:disabled {
       background-color: #e5e5e5;
-      color: #a9a9a9 ;
+      color: #a9a9a9;
       cursor: not-allowed;
     }
   }
@@ -68,7 +68,7 @@
     .selectedNameBlock {
       align-items: center;
       background-color: #f5f5f5;
-      border-radius: 4px;
+      border-radius: 20px;
       color: #1f2228;
       display: flex;
       flex-direction: row;
@@ -98,7 +98,7 @@
     border-radius: 6px;
     color: #fcf3ea;
     cursor: pointer;
-    font-weight: bold; 
+    font-weight: bold;
     font-size: 16px;
     height: 34px;
     margin-bottom: 10px;
@@ -109,7 +109,7 @@
 
   .submitButton {
     all: unset;
-    background-color: #4B92FB;
+    background-color: #4b92fb;
     border-radius: 4px;
     color: aliceblue;
     cursor: pointer;
@@ -124,7 +124,7 @@
     all: unset;
     background-color: #e5e5e5;
     border-radius: 4px;
-    color: #a9a9a9 ;
+    color: #a9a9a9;
     cursor: not-allowed;
     font-size: 16px;
     font-weight: bold;
@@ -137,28 +137,12 @@
 
 .matchesContainer {
   margin: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  .matchesTitle{
+  .matchesTitle {
     font-size: 20px;
-  }
-
-  .matchBlock {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    padding: 10px 0;
-
-    .matchName {
-      background-color: aquamarine;
-      border-radius: 4px;
-      padding: 10px;
-    }
-
-    .matchIcon{
-      width: 50px;
-      height: 20px;
-    }
   }
 
   .matchesClearAllButton {
@@ -167,7 +151,7 @@
     border-radius: 4px;
     color: #fcf3ea;
     cursor: pointer;
-    font-weight: bold; 
+    font-weight: bold;
     font-size: 16px;
     height: 34px;
     margin-bottom: 10px;
@@ -180,4 +164,39 @@
 .error {
   color: #d4351f;
   font-weight: bold;
+}
+.matchesTable {
+  /* font-family: "Arial"; */
+  margin: 20px 10px;
+  border-collapse: collapse;
+  border: 1px solid #eee;
+  border-bottom: 2px solid #00cccc;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1), 0px 10px 20px rgba(0, 0, 0, 0.05),
+    0px 20px 20px rgba(0, 0, 0, 0.05), 0px 30px 20px rgba(0, 0, 0, 0.05);
+
+  tr {
+    &:hover {
+      background-color: #f4f4f4;
+/* 
+      td {
+        color: #555;
+      } */
+    }
+  }
+  th,
+  td {
+    color: #1f2228;
+    border: 1px solid #eee;
+    padding: 12px 35px;
+    border-collapse: collapse;
+  }
+  th {
+    background: #0f6e6e;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+    &.last {
+      border-right: none;
+    }
+  }
 }
