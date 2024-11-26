@@ -73,7 +73,10 @@ function App() {
       res.push({ name: namesArray[i], match: assignments[namesArray[i]] });
     }
     setResultMatches(res);
-    setCurrentState('result');
+
+    if (namesArray.length && namesArray.length >= 3 ) {
+      setCurrentState('result');
+    }
   };
 
   const handleClearAll = () => {
